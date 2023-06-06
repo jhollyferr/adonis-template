@@ -1,0 +1,96 @@
+image: node:16
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Run tests
+          deployment: test
+          script:
+              - npm ci
+              - npm test
+      - step:
+          caches:
+            - node
+          name: Deploy production
+          deployment: production  
+          script:
+            - echo "Rodou"
+            # - apt-get update
+            # - apt-get install -y zip
+            # - npm ci
+            # - npm run build
+            # - cp -R aws_config/scripts-production ./build/scripts
+            # - cp aws_config/appspec-production.yml ./build/appspec.yml
+            # - cd build
+            # - zip -r application.zip .
+            # - pipe: atlassian/aws-code-deploy:1.1.1
+            #   variables:
+            #     AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+            #     AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+            #     AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+            #     APPLICATION_NAME: $APPLICATION_NAME
+            #     COMMAND: 'upload' # 'upload' or 'deploy'.
+            #     S3_BUCKET: $S3_BUCKET # Optional.
+            #     VERSION_LABEL: 'my-app-2.0.0' # Optional.
+            #     ZIP_FILE: 'application.zip'
+            # - pipe: atlassian/aws-code-deploy:1.1.1
+            #   variables:
+            #     AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+            #     AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+            #     AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+            #     APPLICATION_NAME: $APPLICATION_NAME
+            #     COMMAND: 'deploy' # 'upload' or 'deploy'.
+            #     S3_BUCKET: $S3_BUCKET # Optional.
+            #     VERSION_LABEL: 'my-app-2.0.0' # Optional.
+            #     ZIP_FILE: 'application.zip'
+            #     FILE_EXISTS_BEHAVIOR: 'OVERWRITE' # Optional.
+            #     DEPLOYMENT_GROUP: $DEPLOYMENT_GROUP
+            #     IGNORE_APPLICATION_STOP_FAILURES: 'true' # Optional.
+            #     WAIT: 'true' # Optional.
+    develop:
+      - step:
+          name: Run tests
+          deployment: test
+          script:
+              - npm ci
+              - npm test
+      - step:
+          caches:
+            - node
+          name: Deploy Staging
+          deployment: staging
+          script:
+            - echo "Rodou"
+            # - apt-get update
+            # - apt-get install -y zip
+            # - npm ci
+            # - npm run build
+            # - cp -R aws_config/scripts-staging ./build/scripts
+            # - cp aws_config/appspec-staging.yml ./build/appspec.yml
+            # - cd build
+            # - zip -r application.zip .
+            # - pipe: atlassian/aws-code-deploy:1.1.1
+            #   variables:
+            #     AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+            #     AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+            #     AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+            #     APPLICATION_NAME: $APPLICATION_NAME
+            #     COMMAND: 'upload' # 'upload' or 'deploy'.
+            #     S3_BUCKET: $S3_BUCKET # Optional.
+            #     VERSION_LABEL: 'my-app-2.0.0' # Optional.
+            #     ZIP_FILE: 'application.zip'
+            # - pipe: atlassian/aws-code-deploy:1.1.1
+            #   variables:
+            #     AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+            #     AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+            #     AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+            #     APPLICATION_NAME: $APPLICATION_NAME
+            #     COMMAND: 'deploy' # 'upload' or 'deploy'.
+            #     S3_BUCKET: $S3_BUCKET # Optional.
+            #     VERSION_LABEL: 'my-app-2.0.0' # Optional.
+            #     ZIP_FILE: 'application.zip'
+            #     FILE_EXISTS_BEHAVIOR: 'OVERWRITE' # Optional.
+            #     DEPLOYMENT_GROUP: $DEPLOYMENT_GROUP
+            #     IGNORE_APPLICATION_STOP_FAILURES: 'true' # Optional.
+            #     WAIT: 'true' # Optional.
